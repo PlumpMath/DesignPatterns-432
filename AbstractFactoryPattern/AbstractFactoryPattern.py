@@ -7,6 +7,12 @@ class Text:
 		self.y = y
 		self.rows = [list(text)]
 
+class Diagram:
+	def add(self, component):
+		for y, row in enumerate(component.rows):
+			for x, char in enumerate(row):
+				self.diagram[y + component.y][x + component.x] = char
+
 class DiagramFactory:
 	# 工厂类：需提供一样的接口
 	def make_diagram(self, width, height):
@@ -31,6 +37,7 @@ class SvgDiagramFactory:
 def create_diagram(factory):
 	# create_diagram无需关心参数factory具体是什么
 	# 只要知道factory具有所需的接口（make_diagram，make_rectangle，make_text）
+	# 同时，diagram也需要具有一样的接口：add()
 	diagram = factory.make_diagram(30, 7);
 	rectangle = factory.make_rectangle(4, 1, 22, 5, "yellow")
 	text = factory.make_text(7, 3, "Abstract Factory")
