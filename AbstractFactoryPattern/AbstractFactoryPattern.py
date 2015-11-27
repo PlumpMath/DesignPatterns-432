@@ -1,8 +1,13 @@
 
 
 
+class Text:
+	def __init__(self, x, y, text, fontsize):
+		self.x = x
+		self.y = y
+		self.rows = [list(text)]
 
-def DiagramFactory():
+class DiagramFactory:
 	# 工厂类：需提供一样的接口
 	def make_diagram(self, width, height):
 		return Diagram(width, height)
@@ -13,15 +18,15 @@ def DiagramFactory():
 	def make_text(self, x, y, text, fontsize = 12):
 		return Text(x, y, text, fontsize)
 
-def SvgDiagramFactory():
+class SvgDiagramFactory:
 	def make_diagram(slef, width, height):
 		return SvgDiagram(width, height)
 
 	def make_rectangle(self, x, y, width, height, fill = "white", stroke = "black"):
-		return Rectangle(x, y, width, height, fill, stroke)
+		return SvgRectangle(x, y, width, height, fill, stroke)
 
 	def make_text(self, x, y, text, fontsize = 12):
-		return Text(x, y, text, fontsize)
+		return SvgText(x, y, text, fontsize)
 
 def create_diagram(factory):
 	# create_diagram无需关心参数factory具体是什么
