@@ -24,6 +24,10 @@ class SvgText:
 		fontsize += SVG_SCALE // 10
 		self.svg = SVG_TEXT.format(**locals())
 
+class SvgDiagram:
+	def add(self, component):
+		self.diagram.append(component.svg)
+
 class DiagramFactory:
 	# 工厂类：需提供一样的接口
 	def make_diagram(self, width, height):
