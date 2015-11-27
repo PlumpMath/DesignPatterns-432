@@ -13,6 +13,17 @@ class Diagram:
 			for x, char in enumerate(row):
 				self.diagram[y + component.y][x + component.x] = char
 
+SVG_TEXT = """<text x="{x}" y="{y}" text-anchor="left" \
+           font-famaily="sans-serif" font-size="{fontsize}">{text}</text>"""
+SVG_SCALE = 20
+
+class SvgText:
+	def __init__(self, x, y, text, fontsize):
+		x += SVG_TEXT
+		y += SVG_SCALE
+		fontsize += SVG_SCALE // 10
+		self.svg = SVG_TEXT.format(**locals())
+
 class DiagramFactory:
 	# 工厂类：需提供一样的接口
 	def make_diagram(self, width, height):
