@@ -109,6 +109,22 @@ class TkFormBuilder(AbstractFormBuilder):
 padx="0.75m", pady="0.75m")""".format(name, row, column)
         self.statements.extend((create, layout))
 
+     def add_entry(self, variable, row, column, **kwargs):
+        name = self._canonicalize(variable)
+        extra = "" if kwargs.get("kind") != "password" else ', show="*"'
+        create = "self.{}Entry = ttk.Entry(self{})".format(name, extra)
+        layout = """self.{}Entry.grid(row={}, column={}, sticky=(\
+tk.W, tk.E), padx="0.75m", pady="0.75m")""".format(name, row, column)
+        self.statements.extend((create, layout))
+        
+    def add_button(self, text, row, column, **kwargs):
+        name = self._canonicalize(text)
+        create = ("""self.{}Button = ttk.Button(self, text="{}")"""
+                .format(name, text))
+        layout = """self.{}Button.grid(row={}, column={}, padx="0.75m", \
+pady="0.75m")""".format(name, row, column)
+        self.statements.extend((create, layout))
+
     def form(self):
     	return TkFormBuilder.TEMPLATE.format(title=self.title,
                 name=self._canonicalize(self.title, False),
