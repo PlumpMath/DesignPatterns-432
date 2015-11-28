@@ -92,3 +92,24 @@ class HtmlFormBuilder(AbstractFormBuilder):
             html.append("    " + value)
         html.append("  </tr>\n</table></form></body></html>")
         return "\n".join(html)
+
+class TkFormBuilder(AbstractFormBuilder):
+	def __init__(self):
+		self.title = "TkFormBuilder"
+		self.statements = []
+
+	def add_title(self, title):
+		super.add_title(title)
+
+	def add_label(self, text, row, column, **kwargs):
+		name = self._canonicalize(text)
+        create = """self.{}Label = ttk.Label(self, text="{}:")""".format(
+                name, text)
+        layout = """self.{}Label.grid(row={}, column={}, sticky=tk.W, \
+padx="0.75m", pady="0.75m")""".format(name, row, column)
+        self.statements.extend((create, layout))
+
+    def form(self):
+    	return TkFormBuilder.TEMPLATE.format(title=self.title,
+                name=self._canonicalize(self.title, False),
+                statements="\n        ".join(self.statements))
