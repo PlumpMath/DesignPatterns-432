@@ -148,6 +148,12 @@ tk.W, tk.E), padx="0.75m", pady="0.75m")""".format(name, row, column)
 pady="0.75m")""".format(name, row, column)
         self.statements.extend((create, layout))
 
+    def _canonicalize(self, text, startLower=True):
+        text = re.sub(r"\W+", "", text)
+        if text[0].isdigit():
+            return "_" + text
+        return text if not startLower else text[0].lower() + text[1:]
+
     def form(self):
     	return TkFormBuilder.TEMPLATE.format(title=self.title,
                 name=self._canonicalize(self.title, False),
