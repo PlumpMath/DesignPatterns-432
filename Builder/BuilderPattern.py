@@ -158,3 +158,9 @@ pady="0.75m")""".format(name, row, column)
     	return TkFormBuilder.TEMPLATE.format(title=self.title,
                 name=self._canonicalize(self.title, False),
                 statements="\n        ".join(self.statements))
+
+###
+# Builder模式与Abstract Factory模式的区别在于，不仅提供了创建复杂对象所需的方法，
+# 还保存了复杂对象里各个部分的细节
+# 适用于需要把复杂对象各部分的细节与其创建流程相分离的场合
+
