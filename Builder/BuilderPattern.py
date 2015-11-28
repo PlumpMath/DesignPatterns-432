@@ -72,4 +72,23 @@ class HtmlFormBuilder(AbstractFormBuilder):
         self.items[(row, column)] = html
 
 
-    
+    def add_button(self, text, row, column, **kwargs):
+        html = """<td><input type="submit" value="{}" /></td>""".format(
+                escape(text))
+        self.items[(row, column)] = html
+
+
+    def form(self):
+        html = ["<!doctype html>\n<html><head><title>{}</title></head>"
+                "<body>".format(self.title), '<form><table border="0">']
+        thisRow = None
+        for key, value in sorted(self.items.items()):
+            row, column = key
+            if thisRow is None:
+                html.append("  <tr>")
+            elif thisRow != row:
+                html.append("  </tr>\n  <tr>")
+            thisRow = row
+            html.append("    " + value)
+        html.append("  </tr>\n</table></form></body></html>")
+        return "\n".join(html)
