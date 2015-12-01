@@ -15,7 +15,7 @@ class AbstractBoard:
         self.board = [[None for _ in range(columns)] for _ in range(rows)]
         self.populate_board()
 
-
+    # 另一种抽象基类的做法：凡是由子类重新实现的方法都抛出NotImplementedError异常
     def populate_board(self):
         raise NotImplementedError()
 
@@ -28,3 +28,16 @@ class AbstractBoard:
                 squares.append(square)
             squares.append("\n")
         return "".join(squares)
+
+class CheckersBoard(AbstractBoard):
+
+    def __init__(self):
+        super().__init__(10, 10)
+
+
+    def populate_board(self):
+        for x in range(0, 9, 2):
+            for row in range(4):
+                column = x + ((row + 1) % 2)
+                self.board[row][column] = BlackDraught()
+                self.board[row + 6][column] = WhiteDraught()
