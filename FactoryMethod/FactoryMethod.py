@@ -41,3 +41,30 @@ class CheckersBoard(AbstractBoard):
                 column = x + ((row + 1) % 2)
                 self.board[row][column] = BlackDraught()
                 self.board[row + 6][column] = WhiteDraught()
+                
+class ChessBoard(AbstractBoard):
+
+    def __init__(self):
+        super().__init__(8, 8)
+
+
+    def populate_board(self):
+        self.board[0][0] = BlackChessRook()
+        self.board[0][1] = BlackChessKnight()
+        self.board[0][2] = BlackChessBishop()
+        self.board[0][3] = BlackChessQueen()
+        self.board[0][4] = BlackChessKing()
+        self.board[0][5] = BlackChessBishop()
+        self.board[0][6] = BlackChessKnight()
+        self.board[0][7] = BlackChessRook()
+        self.board[7][0] = WhiteChessRook()
+        self.board[7][1] = WhiteChessKnight()
+        self.board[7][2] = WhiteChessBishop()
+        self.board[7][3] = WhiteChessQueen()
+        self.board[7][4] = WhiteChessKing()
+        self.board[7][5] = WhiteChessBishop()
+        self.board[7][6] = WhiteChessKnight()
+        self.board[7][7] = WhiteChessRook()
+        for column in range(8):
+            self.board[1][column] = BlackChessPawn()
+            self.board[6][column] = WhiteChessPawn()
