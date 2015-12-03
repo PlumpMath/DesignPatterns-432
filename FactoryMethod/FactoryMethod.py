@@ -68,3 +68,30 @@ class ChessBoard(AbstractBoard):
         for column in range(8):
             self.board[1][column] = BlackChessPawn()
             self.board[6][column] = WhiteChessPawn()
+
+class Piece(str):
+
+    __slots__ = ()
+
+
+class BlackDraught(Piece):
+
+    __slots__ = ()
+
+    def __new__(Class):
+        return super().__new__(Class, "\N{black draughts man}")
+
+
+class WhiteDraught(Piece):
+
+    __slots__ = ()
+    
+    def __new__(Class):
+        return super().__new__(Class, "\N{white draughts man}")
+
+
+class BlackChessKing(Piece):
+
+    __slots__ = ()
+    
+    def __new__(Class):
