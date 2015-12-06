@@ -54,3 +54,19 @@ class CheckersBoard(AbstractBoard):
                 for row, color in ((y, "black"), (y + 6, "white")):
                     self.board[row][column] = create_piece("draught",
                             color)
+
+class ChessBoard(AbstractBoard):
+
+    def __init__(self):
+        super().__init__(8, 8)
+
+
+    def populate_board(self):
+        for row, color in ((0, "black"), (7, "white")):
+            for columns, kind in (((0, 7), "rook"), ((1, 6), "knight"),
+                    ((2, 5), "bishop"), ((3,), "queen"), ((4,), "king")):
+                for column in columns:
+                    self.board[row][column] = create_piece(kind, color)
+        for column in range(8):
+            for row, color in ((1, "black"), (6, "white")):
+                self.board[row][column] = create_piece("pawn", color)
