@@ -70,3 +70,9 @@ class ChessBoard(AbstractBoard):
         for column in range(8):
             for row, color in ((1, "black"), (6, "white")):
                 self.board[row][column] = create_piece("pawn", color)
+
+def create_piece(kind, color):
+    if kind == "draught":
+        return eval("{}{}()".format(color.title(), kind.title()))
+    return eval("{}Chess{}()".format(color.title(), kind.title()))
+    # Using eval() is risky
