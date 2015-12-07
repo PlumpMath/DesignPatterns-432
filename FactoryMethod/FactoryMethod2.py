@@ -76,3 +76,20 @@ def create_piece(kind, color):
         return eval("{}{}()".format(color.title(), kind.title()))
     return eval("{}Chess{}()".format(color.title(), kind.title()))
     # Using eval() is risky
+
+class Piece(str):
+
+    __slots__ = ()
+
+
+for code in itertools.chain((0x26C0, 0x26C2), range(0x2654, 0x2660)):
+    char = chr(code)
+    name = unicodedata.name(char).title().replace(" ", "")
+    if name.endswith("sMan"):
+        name = name[:-4]
+    exec("""\
+class {}(Piece):
+    __slots__ = ()
+    def __new__(Class):
+        return super().__new__(Class, "{}")""".format(name, char))
+    # Using exec() is risky
