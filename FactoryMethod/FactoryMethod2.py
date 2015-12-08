@@ -93,3 +93,6 @@ class {}(Piece):
     def __new__(Class):
         return super().__new__(Class, "{}")""".format(name, char))
     # Using exec() is risky
+
+if __name__ == "__main__":
+    main()
