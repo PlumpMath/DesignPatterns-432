@@ -37,3 +37,20 @@ for code in itertools.chain((0x26C0, 0x26C2), range(0x2654, 0x2660)):
     new = make_new_method(char)
     Class = type(name, (Piece,), dict(__slots__=(), __new__=new))
     setattr(sys.modules[__name__], name, Class) # Can be done better!
+
+class AbstractBoard:
+
+    __classForPiece = {(DRAUGHT, BLACK): BlackDraught,
+            (PAWN, BLACK): BlackChessPawn,
+            (ROOK, BLACK): BlackChessRook,
+            (KNIGHT, BLACK): BlackChessKnight,
+            (BISHOP, BLACK): BlackChessBishop,
+            (KING, BLACK): BlackChessKing,
+            (QUEEN, BLACK): BlackChessQueen,
+            (DRAUGHT, WHITE): WhiteDraught,
+            (PAWN, WHITE): WhiteChessPawn,
+            (ROOK, WHITE): WhiteChessRook,
+            (KNIGHT, WHITE): WhiteChessKnight,
+            (BISHOP, WHITE): WhiteChessBishop,
+            (KING, WHITE): WhiteChessKing,
+            (QUEEN, WHITE): WhiteChessQueen}
