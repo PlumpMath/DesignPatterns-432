@@ -54,3 +54,11 @@ class AbstractBoard:
             (BISHOP, WHITE): WhiteChessBishop,
             (KING, WHITE): WhiteChessKing,
             (QUEEN, WHITE): WhiteChessQueen}
+
+    def __init__(self, rows, columns):
+        self.board = [[None for _ in range(columns)] for _ in range(rows)]
+        self.populate_board()
+
+
+    def create_piece(self, kind, color):
+        return AbstractBoard.__classForPiece[kind, color]()
