@@ -75,3 +75,17 @@ class AbstractBoard:
                 squares.append(square)
             squares.append("\n")
         return "".join(squares)
+
+class CheckersBoard(AbstractBoard):
+
+    def __init__(self):
+        super().__init__(10, 10)
+
+
+    def populate_board(self):
+        for x in range(0, 9, 2):
+            for y in range(4):
+                column = x + ((y + 1) % 2)
+                for row, color in ((y, BLACK), (y + 6, WHITE)):
+                    self.board[row][column] = self.create_piece(DRAUGHT,
+                            color)
