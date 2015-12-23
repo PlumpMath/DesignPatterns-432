@@ -81,3 +81,10 @@ class ChessBoard(AbstractBoard):
         for column in range(8):
             for row, color in ((1, BLACK), (6, WHITE)):
                 self.board[row][column] = create_piece(PAWN, color)
+
+def create_piece(kind, color):
+    color = "White" if color == WHITE else "Black"
+    name = {DRAUGHT: "Draught", PAWN: "ChessPawn", ROOK: "ChessRook",
+            KNIGHT: "ChessKnight", BISHOP: "ChessBishop",
+            KING: "ChessKing", QUEEN: "ChessQueen"}[kind]
+    return globals()[color + name]()
