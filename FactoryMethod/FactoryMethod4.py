@@ -88,3 +88,7 @@ def create_piece(kind, color):
             KNIGHT: "ChessKnight", BISHOP: "ChessBishop",
             KING: "ChessKing", QUEEN: "ChessQueen"}[kind]
     return globals()[color + name]()
+
+class Piece(str):
+
+    __slots__ = ()
