@@ -92,3 +92,13 @@ def create_piece(kind, color):
 class Piece(str):
 
     __slots__ = ()
+
+for code in itertools.chain((0x26C0, 0x26C2), range(0x2654, 0x2660)):
+    char = chr(code)
+    name = unicodedata.name(char).title().replace(" ", "")
+    if name.endswith("sMan"):
+        name = name[:-4]
+    new = (lambda char: lambda Class: Piece.__new__(Class, char))(char)
+    new.__name__ = "__new__"
+    Class = type(name, (Piece,), dict(__slots__=(), __new__=new))
+    globals()[name] = Class
