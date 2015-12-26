@@ -102,3 +102,6 @@ for code in itertools.chain((0x26C0, 0x26C2), range(0x2654, 0x2660)):
     new.__name__ = "__new__"
     Class = type(name, (Piece,), dict(__slots__=(), __new__=new))
     globals()[name] = Class
+
+if __name__ == "__main__":
+    main()
